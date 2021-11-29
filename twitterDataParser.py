@@ -23,18 +23,17 @@ def main():
                         "name": tweet["user"]["name"],
                         "screen_name": tweet["user"]["screen_name"],
                         "location": tweet["user"]["location"],
-			"verified": tweet["user"]["verified"]
+                        "verified": tweet["user"]["verified"]
                     },
-	            "is_quote_status": tweet["is_quote_status"],
-		    #"retweeted_status_id": tweet["retweeted_status"]["id"],
+                    "is_quote_status": tweet["is_quote_status"],
                     "hashtags": tweet["entities"]["hashtags"],
                     "timestamp_ms": tweet["timestamp_ms"],
                     "in_reply_to_status_id": tweet["in_reply_to_status_id"],
                     "in_reply_to_user_id": tweet["in_reply_to_user_id"],
                     "in_reply_to_screen_name": tweet["in_reply_to_screen_name"]
                 }
-		if tweet["retweeted_status"]["id"] is in tweet:
-		    tweetObj["retweeted_status_id"] = tweet["retweeted_status"]["id"]
+                if "retweeted_status" in line:
+                    tweetObj["retweeted_status_id"] = tweet["retweeted_status"]["id"]
                 #print(tweetObj)
                 clean_tweet = json.dumps(tweetObj)
                 #print(clean_tweet)
