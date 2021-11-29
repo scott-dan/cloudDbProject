@@ -1,0 +1,20 @@
+use("twitterArchive");
+
+db.Tweets.aggregate([
+    {
+        $group: {
+            _id: null,
+            all: { $sum: 1},
+            quoted: { $sum: { $cond: [ { $eq: [ "$is_quote_status", true] }, 1, 0 ] } },
+            reply: { $sum: { $cond: [ { $lte: ["$in_reply_to_status_id", null] }, 0, 1 ] } },
+            retweet: { $sum: { $cond: [ { $lte: ["$retweeted_status.id", null] }, 0, 1 ] } },
+        }
+    },
+    {
+        $project: {
+            quotedpct: {$multiply: [100, { $divide: [ "$quoted", "$all" ] }]},
+            replypct: {$multiply: [100, { $divide: [ "$reply", "$all" ] }]},
+            retweetpct: {$multiply: [100, { $divide: [ "$retweet", "$all" ] }]},
+        }
+    }
+]);
