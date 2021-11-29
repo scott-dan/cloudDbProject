@@ -26,13 +26,15 @@ def main():
 			"verified": tweet["user"]["verified"]
                     },
 	            "is_quote_status": tweet["is_quote_status"],
-		    "retweeted_status_id": tweet["retweeted_status"]["id"],
+		    #"retweeted_status_id": tweet["retweeted_status"]["id"],
                     "hashtags": tweet["entities"]["hashtags"],
                     "timestamp_ms": tweet["timestamp_ms"],
                     "in_reply_to_status_id": tweet["in_reply_to_status_id"],
                     "in_reply_to_user_id": tweet["in_reply_to_user_id"],
                     "in_reply_to_screen_name": tweet["in_reply_to_screen_name"]
                 }
+		if tweet["retweeted_status"]["id"] is in tweet:
+		    tweetObj["retweeted_status_id"] = tweet["retweeted_status"]["id"]
                 #print(tweetObj)
                 clean_tweet = json.dumps(tweetObj)
                 #print(clean_tweet)
