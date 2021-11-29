@@ -22,8 +22,11 @@ def main():
                         "id": tweet["user"]["id"],
                         "name": tweet["user"]["name"],
                         "screen_name": tweet["user"]["screen_name"],
-                        "location": tweet["user"]["location"]
+                        "location": tweet["user"]["location"],
+			"verified": tweet["user"]["verified"]
                     },
+	            "is_quote_status": tweet["is_quote_status"],
+		    "retweeted_status_id": tweet["retweeted_status"]["id"],
                     "hashtags": tweet["entities"]["hashtags"],
                     "timestamp_ms": tweet["timestamp_ms"],
                     "in_reply_to_status_id": tweet["in_reply_to_status_id"],
